@@ -1,0 +1,35 @@
+server.port=8070
+spring.datasource.url=jdbc:postgresql://localhost:5432/
+spring.datasource.username=postgres
+spring.datasource.password=123
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+
+
+//CREATE
+    @PostMapping
+    public String add(@RequestBody ){
+        
+    }
+    //READ
+    @GetMapping
+    public List<>get(){
+        
+    }
+    //UPDATE
+    @PutMapping
+    public String edit(@RequestBody ){
+        
+    }
+    //DELETE
+    @DeleteMapping(value = "/{id}")
+    public String delete(@PathVariable Integer id){
+        
+    }
+    //READ BY ID
+    @GetMapping(value = "/{id}")
+    public Optional<> getById(@PathVariable Integer id){
+        
+    }    
+

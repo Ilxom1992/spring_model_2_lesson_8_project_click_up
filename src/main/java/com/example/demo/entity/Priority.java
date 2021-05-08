@@ -5,15 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class attachment extends AbstractEntity {
-    private String name;
-    private String OriginalName;
-    private String contentType;
+public class Priority {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
+    @ManyToOne
+    private Icon icon;
 }

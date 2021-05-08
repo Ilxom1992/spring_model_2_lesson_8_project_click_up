@@ -14,12 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Position extends AbstractEntity {
-@Column(unique = true,nullable = false)
-    private  String name;//ADMIN,USER VA BOSHQALAR
 
+    @Column(unique = true,nullable = false)
+    private  String name;//ADMIN,USER VA BOSHQALAR
 
     @Enumerated(value = EnumType.STRING)
     @ElementCollection(fetch = FetchType.LAZY)
     private List<Huquq> huquqList;
+
     private  String descriptin;
 }

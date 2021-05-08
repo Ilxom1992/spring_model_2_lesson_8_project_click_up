@@ -28,28 +28,27 @@ public class User extends AbstractEntity implements UserDetails{
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false,unique = true)
+   // @Column(nullable = false,unique = true)
     private String username;
 
-    @Column(nullable = false,unique = true)
-    private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String color;
 
-
-
-
-    private String initialLetter;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Position position;
 
     private boolean enabled;
 
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String color;
+
+    private String initialLetter;
        @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<Huquq> huquqList = this.position.getHuquqList();

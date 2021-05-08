@@ -10,7 +10,4 @@ public enum Huquq {
     ADD_EDIT,
     DELETE_ROLE,
     VIEW_ROLE,
-
-
-
 }

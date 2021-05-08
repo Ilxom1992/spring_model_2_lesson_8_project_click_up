@@ -14,7 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthService implements UserDetailsService {
+public class AuthService
+        implements UserDetailsService
+{
     final UserRepository userRepository;
     final PositionRepository positionRepository;
     final PasswordEncoder passwordEncoder;
@@ -41,8 +43,7 @@ public class AuthService implements UserDetailsService {
                 passwordEncoder.encode(registerDto.getPassword()),
                 positionRepository.findByName(AppConstants.USER).orElseThrow(()->new
                                 RecursNotFoundExceptions("Lavozim","Name",AppConstants.USER)),
-true
-        );
+true,"email@Gmail.com","red","XI");
        userRepository.save(user);
     return new ApiResponse("user saved",true);
 }

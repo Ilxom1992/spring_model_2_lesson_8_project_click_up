@@ -40,7 +40,7 @@ private String initialMode;
             ));
             Position user = positionRepository.save(new Position(
                     AppConstants.USER,
-                    Arrays.asList(ADD_COMMIT, EDIT_COMMIT, DELETE_MY_COMMIT),
+                    Arrays.asList(),
                     "Oddiy foydalanuvchi"
             ));
             userRepository.save(new User(
@@ -48,14 +48,14 @@ private String initialMode;
                     "admin",
                     passwordEncoder.encode("admin123"),
                     admin,
-                    true
+                    true,"email2@gmail.com","red","BH"
             ));
             userRepository.save(new User(
                     "User",
                     "user",
                     passwordEncoder.encode("user123"),
                     user,
-                    true
+                    true,"email@gmail.com","color","BH"
             ));
         }
     }
