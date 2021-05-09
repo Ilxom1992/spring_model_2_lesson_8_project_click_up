@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Icon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     private Attachment attachment;
     private String color;
