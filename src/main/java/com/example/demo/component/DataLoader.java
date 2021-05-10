@@ -1,7 +1,6 @@
 package com.example.demo.component;
 
-import com.example.demo.entity.Position;
-import com.example.demo.entity.User;
+import com.example.demo.entity.Tamplate.Position;
 import com.example.demo.entity.enums.Huquq;
 import com.example.demo.repository.PositionRepository;
 
@@ -13,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-
-import static com.example.demo.entity.enums.Huquq.*;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -31,8 +28,8 @@ public class DataLoader implements CommandLineRunner {
 private String initialMode;
     @Override
     public void run(String... args) throws Exception {
-        if (initialMode.equals("always")){
-            Huquq[] huquqs=Huquq.values();
+        if (initialMode.equals("always")) {
+            Huquq[] huquqs = Huquq.values();
             Position admin = positionRepository.save(new Position(
                     AppConstants.ADMIN,
                     Arrays.asList(huquqs),
@@ -42,20 +39,6 @@ private String initialMode;
                     AppConstants.USER,
                     Arrays.asList(),
                     "Oddiy foydalanuvchi"
-            ));
-            userRepository.save(new User(
-                    "Admin",
-                    "admin",
-                    passwordEncoder.encode("admin123"),
-                    admin,
-                    true,"email2@gmail.com","red","BH"
-            ));
-            userRepository.save(new User(
-                    "User",
-                    "user",
-                    passwordEncoder.encode("user123"),
-                    user,
-                    true,"email@gmail.com","color","BH"
             ));
         }
     }

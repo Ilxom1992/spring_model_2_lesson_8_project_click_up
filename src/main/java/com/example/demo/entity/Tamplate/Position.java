@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.Tamplate;
 
 import com.example.demo.entity.Tamplate.AbstractEntity;
 import com.example.demo.entity.enums.Huquq;

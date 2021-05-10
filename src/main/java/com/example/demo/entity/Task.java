@@ -45,9 +45,4 @@ public class Task extends AbstractEntity {
 
     private Timestamp activeDate;
 
-    @ManyToMany
-    private Set<Tag> tags;
-
-    @ManyToMany
-    private Set<User> users;
 }

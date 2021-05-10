@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Position;
+import com.example.demo.entity.Tamplate.Position;
 import com.example.demo.payload.ApiResponse;
 import com.example.demo.payload.PositionDto;
 import com.example.demo.repository.PositionRepository;

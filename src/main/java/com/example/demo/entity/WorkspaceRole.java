@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.Tamplate.AbsUUIDEntity;
 import com.example.demo.entity.Tamplate.AbstractEntity;
+import com.example.demo.entity.enums.WorkspaceRoleName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,17 +13,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class WorkspaceRole {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class WorkspaceRole extends AbsUUIDEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Workspace workspace;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    private WorkspaceRole extendsRole;
+
+@Enumerated(EnumType.STRING)
+    private WorkspaceRoleName extendsRole;
 }

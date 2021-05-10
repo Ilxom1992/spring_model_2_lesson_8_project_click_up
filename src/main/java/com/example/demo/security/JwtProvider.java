@@ -1,7 +1,7 @@
 package com.example.demo.security;
 
 
-import com.example.demo.entity.Position;
+import com.example.demo.entity.Tamplate.Position;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;

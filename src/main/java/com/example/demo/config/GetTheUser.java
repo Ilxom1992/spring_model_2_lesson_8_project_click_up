@@ -17,7 +17,7 @@ public class GetTheUser implements AuditorAware<Long> {
                 && !authentication.getPrincipal().equals("anonymousUser")
         ) {
             User user=(User)authentication.getPrincipal();
-            return Optional.of(user.getId());
+            return null;
         }
 
         return Optional.empty();

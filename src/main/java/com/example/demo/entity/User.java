@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Tamplate.AbstractEntity;
+import com.example.demo.entity.Tamplate.AbsUUIDEntity;
+import com.example.demo.entity.Tamplate.Position;
 import com.example.demo.entity.enums.Huquq;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,10 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "users")
-public class User extends AbstractEntity implements UserDetails{
+public class User extends AbsUUIDEntity implements UserDetails{
 
     @Column(nullable = false)
     private String fullName;
@@ -34,8 +32,6 @@ public class User extends AbstractEntity implements UserDetails{
 
     @Column(nullable = false)
     private String password;
-
-
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Position position;
@@ -49,6 +45,11 @@ public class User extends AbstractEntity implements UserDetails{
     private String color;
 
     private String initialLetter;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Attachment avatar;
+
+
        @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<Huquq> huquqList = this.position.getHuquqList();
@@ -56,7 +57,6 @@ public class User extends AbstractEntity implements UserDetails{
         for (Huquq huquq :huquqList ) {
             grantedAuthorities.add(new SimpleGrantedAuthority(huquq.name()));
     }
-
     return grantedAuthorities;
         }
  //   @Override

@@ -34,13 +34,6 @@ public class Space extends AbstractEntity {
     @OneToOne
     private User owner;
 
-    @ManyToMany
-    private Set<User> member;
 
-    @ManyToMany
-    private Set<ClickApps> clickApps;
-
-    @ManyToMany
-    private Set<View> views;
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.Tamplate.AbsUUIDEntity;
 import com.example.demo.entity.Tamplate.AbstractEntity;
 import com.example.demo.entity.enums.Permission;
 import lombok.AllArgsConstructor;
@@ -12,14 +13,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class WorkspacePermission {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class WorkspacePermission extends AbsUUIDEntity {
 
-    @ManyToOne
-    private WorkspaceRole workspaceRole;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    private WorkspaceRole workspaceRole;//o'rinbosar
 
     @Enumerated(EnumType.STRING)
-    private Permission permission;
+    private Permission permission;//add member ,remove member
 }

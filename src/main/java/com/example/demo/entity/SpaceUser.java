@@ -6,15 +6,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class AttachmentContent {
+@Data
+public class SpaceUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private  byte[] asosiyContent;//ASOSIY CONTENT (MAG'ZI)
-    @OneToOne
-    private  Attachment attachment;//QAYSI FILEGA TEGISHLI EKANLIGINI BILDIRADI
+    private Long id;
+
+    @ManyToOne
+    private Space space;
+
+    @ManyToOne
+    private User member;
 }

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.Tamplate.AbsUUIDEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 
-public class Attachment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Attachment extends AbsUUIDEntity {
     private String fileOriginalName;//PDP  JPG   PNG  PDF
     private Long size;
     private String contentType;//APPLICATION/PDF || IMAGE/PNG

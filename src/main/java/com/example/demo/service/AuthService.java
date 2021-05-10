@@ -37,14 +37,7 @@ public class AuthService
        }
 
 
-        User user=new User(
-                registerDto.getFullName(),
-                registerDto.getUsername(),
-                passwordEncoder.encode(registerDto.getPassword()),
-                positionRepository.findByName(AppConstants.USER).orElseThrow(()->new
-                                RecursNotFoundExceptions("Lavozim","Name",AppConstants.USER)),
-true,"email@Gmail.com","red","XI");
-       userRepository.save(user);
+     
     return new ApiResponse("user saved",true);
 }
 
