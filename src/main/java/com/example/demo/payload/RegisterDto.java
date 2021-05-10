@@ -21,5 +21,7 @@ public class RegisterDto {
 
 @NotNull(message = "password takrori bosh bolmasligi kerak")
     private String prePassword;
+@NotNull(message = "Email bo'sh bo'lmasligi kerak")
+    private String email;
 
 }

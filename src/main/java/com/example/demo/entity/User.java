@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import com.example.demo.entity.Tamplate.AbsUUIDEntity;
 import com.example.demo.entity.Tamplate.Position;
 import com.example.demo.entity.enums.Huquq;
+import com.example.demo.entity.enums.SystemRoleName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,10 +37,16 @@ public class User extends AbsUUIDEntity implements UserDetails{
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Position position;
 
+    @Enumerated(EnumType.STRING)
+    private SystemRoleName systemRoleName;
+
+
     private boolean enabled;
 
     @Column(nullable = false)
     private String email;
+
+    private String emailCode;
 
     @Column(nullable = false)
     private String color;

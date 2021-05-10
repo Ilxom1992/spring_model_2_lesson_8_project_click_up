@@ -1,6 +1,9 @@
 package com.example.demo.security;
 
 
+
+
+
 import com.example.demo.service.AuthService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JwtFilter
-        extends OncePerRequestFilter
-{
+public class JwtFilter extends OncePerRequestFilter {
 
     final  JwtProvider jwtProvider;
     final AuthService authService;
@@ -58,5 +59,6 @@ public class JwtFilter
         }
         return null;
     }
+
 }
 
