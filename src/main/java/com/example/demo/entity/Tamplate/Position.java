@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Position extends AbsLongEntity {
+public class Position extends AbsUUIDEntity {
 
     @Column(unique = true,nullable = false)
     private  String name;//ADMIN,USER VA BOSHQALAR
@@ -21,5 +21,5 @@ public class Position extends AbsLongEntity {
     @ElementCollection(fetch = FetchType.LAZY)
     private List<Huquq> huquqList;
 
-    private  String descriptin;
+    private  String description;
 }

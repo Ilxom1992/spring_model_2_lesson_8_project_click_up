@@ -48,7 +48,7 @@ public class User extends AbsUUIDEntity implements UserDetails{
 
     private String emailCode;
 
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private String color;
 
     private String initialLetter;

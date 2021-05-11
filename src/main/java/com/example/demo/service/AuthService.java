@@ -69,6 +69,7 @@ User user=new User();
        user.setSystemRoleName(SystemRoleName.SYSTEM_USER);
         int code = new Random().nextInt(99999);
         user.setEmail(String.valueOf(code).substring(0,4));
+
         userRepository.save(user);
         sendEmail(user.getEmail(), user.getEmailCode());
         return new ApiResponse("user saved",true);
