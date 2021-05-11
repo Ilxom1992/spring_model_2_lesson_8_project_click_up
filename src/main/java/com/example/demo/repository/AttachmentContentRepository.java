@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Tamplate.AttachmentContent;
+import com.example.demo.entity.AttachmentContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

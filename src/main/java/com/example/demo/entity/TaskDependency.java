@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Tamplate.AbstractEntity;
+import com.example.demo.entity.Tamplate.AbsLongEntity;
 import com.example.demo.entity.enums.DependencyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TaskDependency extends AbstractEntity {
+public class TaskDependency extends AbsLongEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

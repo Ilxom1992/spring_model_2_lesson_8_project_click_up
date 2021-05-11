@@ -1,6 +1,5 @@
 package com.example.demo.entity.Tamplate;
 
-import com.example.demo.entity.Tamplate.AbstractEntity;
 import com.example.demo.entity.enums.Huquq;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Position extends AbstractEntity {
+public class Position extends AbsLongEntity {
 
     @Column(unique = true,nullable = false)
     private  String name;//ADMIN,USER VA BOSHQALAR

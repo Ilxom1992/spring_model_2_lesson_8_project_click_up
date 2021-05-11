@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Tamplate.AbstractEntity;
 import com.example.demo.entity.enums.TaskPermission;
 import lombok.AllArgsConstructor;
 import lombok.Data;

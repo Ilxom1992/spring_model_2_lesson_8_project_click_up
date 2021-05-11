@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Tamplate.AbstractEntity;
+import com.example.demo.entity.Tamplate.AbsLongEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TimeTracked extends AbstractEntity {
+public class TimeTracked extends AbsLongEntity {
     @ManyToOne
     private Task task;
 

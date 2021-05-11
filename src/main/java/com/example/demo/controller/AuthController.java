@@ -34,18 +34,18 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.jwtProvider = jwtProvider;
     }
-
-    @PostMapping("/register")
-    public HttpEntity<?>registerUser(@Valid @RequestBody RegisterDto registerDto){
-        ApiResponse register = authService.register(registerDto);
-        return ResponseEntity.status(register.isSuccess() ? 200:409).body(register);
-    }
-
-    @PostMapping("/login")
-    public HttpEntity<?> login(@RequestBody LoginDto loginDto) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-        User user= (User)authenticate.getPrincipal();
-        String token = jwtProvider.generateToken(user.getUsername(), user.getPosition());
-        return ResponseEntity.ok(token);
-    }
+//
+//    @PostMapping("/register")
+//    public HttpEntity<?>registerUser(@Valid @RequestBody RegisterDto registerDto){
+//        ApiResponse register = authService.register(registerDto);
+//        return ResponseEntity.status(register.isSuccess() ? 200:409).body(register);
+//    }
+//
+//    @PostMapping("/login")
+//    public HttpEntity<?> login(@RequestBody LoginDto loginDto) {
+//        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+//        User user= (User)authenticate.getPrincipal();
+//        String token = jwtProvider.generateToken(user.getUsername(), user.getPosition());
+//        return ResponseEntity.ok(token);
+//    }
 }

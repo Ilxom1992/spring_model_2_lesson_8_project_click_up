@@ -59,7 +59,7 @@ private static final String uploadDirectory="yuklanganlar";
     }
     //GET ATTACHMENT BY ID
     @GetMapping(value = "/info/{id}")
-    public Optional<Attachment> getAttachment(@PathVariable Integer id){
+    public Optional<Attachment> getAttachment(@PathVariable UUID id){
         Optional<Attachment> optionalAttachment = attachmentRepository.findById(id);
         if (optionalAttachment.isPresent()){
             return optionalAttachment;
@@ -68,7 +68,7 @@ private static final String uploadDirectory="yuklanganlar";
     }
         //FILE SYSTEM DAN O'QISH
        @GetMapping("/download/{id}")
-    public  void  getFileFromSystem(@PathVariable Integer id,HttpServletResponse response) throws IOException{
+    public  void  getFileFromSystem(@PathVariable UUID id,HttpServletResponse response) throws IOException{
            Optional<Attachment> optionalAttachment = attachmentRepository.findById(id);
            if (optionalAttachment.isPresent()){
                Attachment attachment= optionalAttachment.get();

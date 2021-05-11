@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Tamplate.AbstractEntity;
+import com.example.demo.entity.Tamplate.AbsLongEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TaskHistory extends AbstractEntity {
+public class TaskHistory extends AbsLongEntity {
     @ManyToOne
     private Task task;
 

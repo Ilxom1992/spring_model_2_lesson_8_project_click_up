@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.Tamplate.AbsLongEntity;
 import com.example.demo.entity.Tamplate.AbsUUIDEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,8 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 
-public class Attachment extends AbsUUIDEntity {
+public class Attachment  extends AbsUUIDEntity {
+
     private String fileOriginalName;//PDP  JPG   PNG  PDF
     private Long size;
     private String contentType;//APPLICATION/PDF || IMAGE/PNG

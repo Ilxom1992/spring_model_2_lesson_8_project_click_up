@@ -27,7 +27,7 @@ public class User extends AbsUUIDEntity implements UserDetails{
     @Column(nullable = false)
     private String fullName;
 
-   // @Column(nullable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String username;
 
 
@@ -66,7 +66,7 @@ public class User extends AbsUUIDEntity implements UserDetails{
     }
     return grantedAuthorities;
         }
- //   @Override
+        //   @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        List<GrantedAuthority>grantedAuthorities=new ArrayList<>();
 //        List<Huquq> huquqList = this.position.getHuquqList();

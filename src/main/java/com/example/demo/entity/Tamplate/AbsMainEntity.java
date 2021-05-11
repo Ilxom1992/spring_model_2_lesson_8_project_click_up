@@ -14,21 +14,17 @@ import java.sql.Timestamp;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbsMainEntity {
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
-    @Column(updatable = false,nullable = false)
     private Timestamp createdAt;
 
     @UpdateTimestamp
-    @Column(nullable = false)
-    private Timestamp updateAt;
+    private Timestamp updatedAt;
 
     @JoinColumn(updatable = false)
-    @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
 
-
-    @LastModifiedBy
     @ManyToOne(fetch = FetchType.LAZY)
-    private User updateBy;
+    private User updatedBy;
 }
