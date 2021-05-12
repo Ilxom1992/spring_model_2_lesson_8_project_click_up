@@ -13,14 +13,9 @@ public class RegisterDto {
 @NotNull(message = "Fullname bolmasligi kerak")
     private String fullName;
 
-@NotNull(message = "username bosh bolmasligi kerak")
-    private String username;
-
 @NotNull(message = "password bosh bolmasligi kerak")
     private String password;
 
-@NotNull(message = "password takrori bosh bolmasligi kerak")
-    private String prePassword;
 @NotNull(message = "Email bo'sh bo'lmasligi kerak")
     private String email;
 

@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
 import com.example.demo.entity.Tamplate.AbsUUIDEntity;
-import com.example.demo.entity.Tamplate.Position;
-import com.example.demo.entity.enums.Huquq;
 import com.example.demo.entity.enums.SystemRoleName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,42 +11,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "users")
+@Entity(name = "userss")
 public class User extends AbsUUIDEntity implements UserDetails{
 
-    @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false,unique = true)
-    private String username;
-
-
-    @Column(nullable = false)
-    private String password;
-
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    private Position position;
-
-    @Enumerated(EnumType.STRING)
-    private SystemRoleName systemRoleName;
-
-
-    private boolean enabled;
-
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    private String emailCode;
+    private String password;
 
-   // @Column(nullable = false)
     private String color;
 
     private String initialLetter;
@@ -56,45 +35,57 @@ public class User extends AbsUUIDEntity implements UserDetails{
     @OneToOne(fetch = FetchType.LAZY)
     private Attachment avatar;
 
+    private boolean enabled;
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
 
-       @Override
+    @Enumerated(EnumType.STRING)
+    private SystemRoleName systemRoleName;
+
+    private String emailCode;
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<Huquq> huquqList = this.position.getHuquqList();
-        List<GrantedAuthority>grantedAuthorities=new ArrayList<>();
-        for (Huquq huquq :huquqList ) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(huquq.name()));
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.systemRoleName.name());
+        return Collections.singletonList(simpleGrantedAuthority);
     }
-    return grantedAuthorities;
-        }
-        //   @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<GrantedAuthority>grantedAuthorities=new ArrayList<>();
-//        List<Huquq> huquqList = this.position.getHuquqList();
-//        for (Huquq huquq :huquqList ) {
-//            grantedAuthorities.add(new GrantedAuthority() {
-//                @Override
-//                public String getAuthority() {
-//                    return huquq.name();
-//                }
-//            });
-//        }
-//
-//        return grantedAuthorities;
-//    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.credentialsNonExpired;
     }
 
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public User(String fullName, String email, String password, SystemRoleName systemRoleName) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.systemRoleName = systemRoleName;
+    }
+
+    public User(String fullName, String email, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+    }
 }

@@ -12,7 +12,8 @@ import javax.persistence.MappedSuperclass;
 @Data
 @MappedSuperclass
 public abstract class AbsLongEntity extends AbsMainEntity {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
 }

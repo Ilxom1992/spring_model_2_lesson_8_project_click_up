@@ -4,7 +4,6 @@ import com.example.demo.entity.Tamplate.AbsLongEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.dom4j.tree.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

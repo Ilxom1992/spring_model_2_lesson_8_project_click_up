@@ -24,7 +24,7 @@ import java.util.Properties;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    final JwtFilter  jwtFilter;
+    final JwtFilter jwtFilter;
     final AuthService authService;
 
     public SecurityConfig(@Lazy JwtFilter jwtFilter,@Lazy AuthService authService) {
@@ -49,14 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
-                .csrf()
-                .disable()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated();
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
     @Bean
