@@ -18,7 +18,7 @@ import java.util.Collections;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "userss")
+@Entity(name = "users")
 public class User extends AbsUUIDEntity implements UserDetails{
 
     private String fullName;

@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.entity.Attachment;
+import com.example.demo.entity.Tamplate.AbsUUIDEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class AttachmentContent {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+public class AttachmentContent extends AbsUUIDEntity {
+
     private  byte[] asosiyContent;//ASOSIY CONTENT (MAG'ZI)
     @OneToOne
     private Attachment attachment;//QAYSI FILEGA TEGISHLI EKANLIGINI BILDIRADI

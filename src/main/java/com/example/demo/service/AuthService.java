@@ -53,8 +53,11 @@ public class AuthService implements UserDetailsService {
         );
         int code = new Random().nextInt(999999);
         user.setEmailCode(String.valueOf(code).substring(0, 4));
+
         userRepository.save(user);
-        sendEmail(user.getEmail(), user.getEmailCode());
+
+       // sendEmail(user.getEmail(), user.getEmailCode());
+
         return new ApiResponse("User saqlandi", true);
     }
 
