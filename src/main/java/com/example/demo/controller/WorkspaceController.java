@@ -20,7 +20,7 @@ public class WorkspaceController {
     @Autowired
     WorkspaceService workspaceService;
     //ish xona qo'shhish
-    @PostMapping
+    @PostMapping("addWorkspace")
     public HttpEntity<?> addWorkspace(@Valid @RequestBody WorkspaceDTO workspaceDTO, @CurrentUser User user) {
         ApiResponse apiResponse = workspaceService.addWorkspace(workspaceDTO, user);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
@@ -35,7 +35,7 @@ public class WorkspaceController {
      */
 
     //Workspace edit qilish
-    @PutMapping("/{id}")
+    @PutMapping("/editWorkspace/{id}")
     public HttpEntity<?> editWorkspace(@PathVariable Long id, @RequestBody WorkspaceDTO workspaceDTO,
                                        @CurrentUser User user) {
         ApiResponse apiResponse = workspaceService.editWorkspace(id,workspaceDTO,user);
@@ -62,7 +62,7 @@ public class WorkspaceController {
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteWorkspace/{id}")
     public HttpEntity<?> deleteWorkspace(@PathVariable Long id) {
         ApiResponse apiResponse = workspaceService.deleteWorkspace(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
@@ -75,7 +75,7 @@ public class WorkspaceController {
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
-    @PutMapping("/join")
+    @PutMapping("/joinToWorkspace")
     public HttpEntity<?> joinToWorkspace(@RequestParam Long id,
                                          @CurrentUser User user) {
         ApiResponse apiResponse = workspaceService.joinToWorkspace(id, user);
@@ -108,7 +108,7 @@ public class WorkspaceController {
   }
     @PostMapping("/permissionOrRemoval")
     public HttpEntity<?> permissionOrRemovalRoles(@RequestBody  WorkspacePermissionDTO workspacePermissionDTO) {
-        ApiResponse apiResponse = workspaceService.permissionOrRemovalOfWorkspaceRoles(workspacePermissionDTO);
+        ApiResponse apiResponse = workspaceService.deleteRolePermission(workspacePermissionDTO);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }

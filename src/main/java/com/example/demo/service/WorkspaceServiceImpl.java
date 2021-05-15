@@ -203,10 +203,11 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
         final WorkspaceRole workspaceRole = optionalWorkspaceRole.get();
 
-        final boolean existsByWorkspaceRoleAndPermissionName =
-                workspacePermissionRepository.existsByWorkspaceRoleAndPermissionNameName(
-                        workspaceRole, workspacePermissionDTO.getPermissionName()
-                );
+        String permissionName=workspacePermissionDTO.getPermissionName();
+//        final boolean existsByWorkspaceRoleAndPermissionName =
+//                workspacePermissionRepository.existsByWorkspaceRoleAndPermissionName(
+//                        workspaceRole,permissionName
+//                );
         WorkspacePermissionName workspacePermissionName = null;
         final WorkspacePermissionName[] values = WorkspacePermissionName.values();
         for (WorkspacePermissionName value : values) {
@@ -214,10 +215,11 @@ public class WorkspaceServiceImpl implements WorkspaceService {
                 workspacePermissionName = value;
             }
         }
-        if (existsByWorkspaceRoleAndPermissionName) {
-            return new ApiResponse("Role '" + workspaceRole.getName() +
-                    "' already has permission '" + workspacePermissionDTO.getPermissionName() + "'", false);
-        }
+
+//        if (existsByWorkspaceRoleAndPermissionName) {
+//            return new ApiResponse("Role '" + workspaceRole.getName() +
+//                    "' already has permission '" + workspacePermissionDTO.getPermissionName() + "'", false);
+//        }
 
         WorkspacePermission workspacePermission = new WorkspacePermission(
                 workspaceRole, workspacePermissionName
@@ -232,10 +234,12 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
         final WorkspaceRole workspaceRole = optionalWorkspaceRole.get();
 
-        final boolean existsByWorkspaceRoleAndPermissionName =
-                workspacePermissionRepository.existsByWorkspaceRoleAndPermissionNameName(
-                        workspaceRole, workspacePermissionDTO.getPermissionName()
-                );
+
+String permissionName=workspacePermissionDTO.getPermissionName();
+//        final boolean existsByWorkspaceRoleAndPermissionName =
+//                workspacePermissionRepository.existsByWorkspaceRoleAndPermissionName(
+//                        workspaceRole, permissionName
+//                );
         WorkspacePermissionName workspacePermissionName = null;
         final WorkspacePermissionName[] permissions = WorkspacePermissionName.values();
         for (WorkspacePermissionName permission : permissions) {
@@ -243,14 +247,16 @@ public class WorkspaceServiceImpl implements WorkspaceService {
                 workspacePermissionName = permission;
             }
         }
-        if (existsByWorkspaceRoleAndPermissionName) {
-            workspacePermissionRepository.deleteByWorkspaceRoleAndPermissionName(workspaceRole, workspacePermissionName);
-            return new ApiResponse("Deleted", true);
-        }
+
+
+//        if (existsByWorkspaceRoleAndPermissionName) {
+//            workspacePermissionRepository.deleteByWorkspaceRoleAndPermissionName(workspaceRole, permissionName);
+//            return new ApiResponse("Deleted", true);
+//        }
 
 
         assert workspacePermissionName != null;
-        return new ApiResponse("Workspace role with '" + workspacePermissionName.name() + "' not exists!", false);
+        return new ApiResponse("Workspace role with ' not exists!", false);
 
     }
 }

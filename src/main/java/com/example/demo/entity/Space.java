@@ -18,21 +18,32 @@ public class Space extends AbsLongEntity {
 
     private String initialLetter;
 
-    @ManyToOne
-    private Icon icon;
-
     @OneToOne
     private Attachment avatar;
 
-    @Column(nullable = false)
-    private String accessType;
+    private boolean accessType;
 
     @ManyToOne
     private Workspace workspace;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User owner;
+    @ManyToOne
+    private Icon icon;
 
+    @PrePersist
+    @PreUpdate
+    public void setInitials() {
+        this.initialLetter= name.substring(0, 1);
+    }
 
-
+    public Space(String name, String color, String initialLetter, Attachment avatar, boolean accessType, Workspace workspace, User owner) {
+        this.name = name;
+        this.color = color;
+        this.initialLetter = initialLetter;
+        this.avatar = avatar;
+        this.accessType = accessType;
+        this.workspace = workspace;
+        this.owner = owner;
+    }
 }

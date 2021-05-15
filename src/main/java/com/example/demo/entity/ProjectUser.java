@@ -16,13 +16,18 @@ public class ProjectUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
 
-    @ManyToOne
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User member;
 
-    @Enumerated(EnumType.STRING)
-    private TaskPermission taskPermission;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Task task;
 
+    public ProjectUser(Project project, User member, Task task) {
+        this.project = project;
+        this.member = member;
+        this.task = task;
+    }
 }
