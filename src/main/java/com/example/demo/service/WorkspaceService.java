@@ -3,10 +3,11 @@ package com.example.demo.service;
 
 
 import com.example.demo.entity.User;
-import com.example.demo.payload.ApiResponse;
-import com.example.demo.payload.MemberDTO;
-import com.example.demo.payload.WorkspaceDTO;
+import com.example.demo.entity.Workspace;
+import com.example.demo.entity.enums.WorkspaceRoleName;
+import com.example.demo.payload.*;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -14,7 +15,7 @@ public interface WorkspaceService {
 
     ApiResponse addWorkspace(WorkspaceDTO workspaceDTO, User user);
 
-    ApiResponse editWorkspace(WorkspaceDTO workspaceDTO);
+    ApiResponse editWorkspace(Long id, WorkspaceDTO workspaceDTO,User user);
 
     ApiResponse changeOwnerWorkspace(Long id, UUID ownerId);
 
@@ -23,4 +24,14 @@ public interface WorkspaceService {
     ApiResponse addOrEditOrRemoveWorkspace(Long id, MemberDTO memberDTO);
 
     ApiResponse joinToWorkspace(Long id, User user);
+
+    ApiResponse seeMembersAndGuests(Long workSpaceId);//member va mehmonlarini ko'rish
+
+    ApiResponse getAListOfWorkspaces(User user);//Workspacelari ro'yxatini olish
+
+    ApiResponse addARoleToWorkspace(RoleDto roleDto, Long workSpaceId);// Workspace ga role qo'shish
+
+    ApiResponse permissionOrRemovalOfWorkspaceRoles(WorkspacePermissionDTO workspacePermissionDTO);// Workspace rolelarini permisison berish yoki olib tashlash
+
+    ApiResponse deleteRolePermission(WorkspacePermissionDTO workspacePermissionDTO);
 }
