@@ -14,6 +14,4 @@ public interface UserRepository extends JpaRepository<User,UUID> {
 
     boolean existsByEmail(String email);
 
-@Query(value = "select * from users join workspace_user wu on users.id = wu.user_id where workspace_id=?1",nativeQuery = true)
-    List<User> getAllByMember(long workSpaceId);
 }

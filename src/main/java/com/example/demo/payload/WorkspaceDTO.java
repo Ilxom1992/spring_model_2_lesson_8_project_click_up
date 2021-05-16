@@ -15,4 +15,8 @@ public class WorkspaceDTO {
 
     private UUID avatarId;
 
+    private UUID ownerId;
+
+    private String initialLetter;
+
 }

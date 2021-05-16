@@ -102,7 +102,7 @@ public class WorkspaceController {
   }
   //Workspace rolelarini permission berish yoki olib tashlash
   @PostMapping("/permissionOrRemovalOfWorkspaceRoles")
-  public HttpEntity<?> SetPermissionWorkspaceRoles(@RequestBody  WorkspacePermissionDTO workspacePermissionDTO) {
+  public HttpEntity<?> SetPermissionWorkspaceRoles(@RequestBody  WorkspaceRoleDTO workspacePermissionDTO) {
       ApiResponse apiResponse = workspaceService.permissionOrRemovalOfWorkspaceRoles(workspacePermissionDTO);
       return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
   }
