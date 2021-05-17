@@ -172,12 +172,26 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return new ApiResponse("Error", false);
     }
 
-//    public  ApiResponse addRole(Long workSpaceId,WorkspaceRoleDTO workspaceRoleDTO,User user){
-//        if (workspaceRoleRepository.existsByWorkspaceIdAndName(workSpaceId,workspaceRoleDTO.getName())){
-//          return new ApiResponse("error",false);
-//        }
-//        return  null;
-//    }
+    public  ApiResponse addRole(Long workSpaceId,WorkspaceRoleDTO workspaceRoleDTO,User user){
+           if (workspaceRoleRepository.existsByWorkspaceIdAndName(workSpaceId,workspaceRoleDTO.getName())){
+          return new ApiResponse("error",false);}
+
+           Optional<Workspace> workspace = workspaceRepository.findById(workSpaceId);
+           WorkspaceRole workspaceRole=new WorkspaceRole(workspace.get(),workspaceRoleDTO.getName(),WorkspaceRoleName.ROLE_ADMIN);
+
+        WorkspaceRole workspaceRole1 = workspaceRoleRepository.save(workspaceRole);
+        List<WorkspacePermission> workspacePermissions
+                    = workspacePermissionRepository.findAllByWorkspaceRole_NameAndWorkspaceRole_WorkspaceId(workspaceRoleDTO.getExtendsRole().name(), workSpaceId);
+        List<WorkspacePermission> newWorkspacePermissions =new ArrayList<>();
+            for (WorkspacePermission work:workspacePermissions) {
+                WorkspacePermission newWorkspacePermission=new WorkspacePermission(
+                        workspaceRole1,
+                        work.getPermission());
+                newWorkspacePermissions.add(newWorkspacePermission);
+            }
+            workspacePermissionRepository.saveAll(newWorkspacePermissions);
+            return new ApiResponse("Tayyor",true);
+        }
 
     //VAZIFALAR
 
