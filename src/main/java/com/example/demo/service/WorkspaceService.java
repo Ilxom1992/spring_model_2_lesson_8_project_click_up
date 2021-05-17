@@ -34,4 +34,6 @@ public interface WorkspaceService {
     ApiResponse permissionOrRemovalOfWorkspaceRoles(WorkspaceRoleDTO workspacePermissionDTO);// Workspace rolelarini permisison berish yoki olib tashlash
 
     ApiResponse deleteRolePermission(WorkspacePermissionDTO workspacePermissionDTO);
+
+    ApiResponse addRole(Long workSpaceId,WorkspaceRoleDTO workspaceRoleDTO);
 }

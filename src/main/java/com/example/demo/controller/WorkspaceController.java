@@ -106,6 +106,11 @@ public class WorkspaceController {
       ApiResponse apiResponse = workspaceService.permissionOrRemovalOfWorkspaceRoles(workspacePermissionDTO);
       return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
   }
+  @PostMapping("/addRole/{workSpaceId}")
+  public ApiResponse addRole(@PathVariable Long workSpaceId, @RequestBody WorkspaceRoleDTO workspaceRoleDTO){
+     return    workspaceService.addRole(workSpaceId,workspaceRoleDTO);
+
+  }
     @PostMapping("/permissionOrRemoval")
     public HttpEntity<?> permissionOrRemovalRoles(@RequestBody  WorkspacePermissionDTO workspacePermissionDTO) {
         ApiResponse apiResponse = workspaceService.deleteRolePermission(workspacePermissionDTO);

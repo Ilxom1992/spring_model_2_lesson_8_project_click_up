@@ -172,7 +172,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return new ApiResponse("Error", false);
     }
 
-    public  ApiResponse addRole(Long workSpaceId,WorkspaceRoleDTO workspaceRoleDTO,User user){
+    public  ApiResponse addRole(Long workSpaceId,WorkspaceRoleDTO workspaceRoleDTO){
            if (workspaceRoleRepository.existsByWorkspaceIdAndName(workSpaceId,workspaceRoleDTO.getName())){
           return new ApiResponse("error",false);}
 
