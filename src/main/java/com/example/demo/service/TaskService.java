@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.payload.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.IOException;
 import java.util.UUID;
 
 public interface TaskService {
@@ -12,10 +14,10 @@ public interface TaskService {
 
      ApiResponse changeYourTaskStatus(Long statusId, StatusDto statusDto);//Task statusini o'zgartirish
 
-     ApiResponse attachAFileToYourTask(TaskDto taskDto); //Task ga file biriktirish
+     ApiResponse attachAFileToYourTask(MultipartHttpServletRequest request, TaskAttachmentDTO taskAttachmentDTO) throws IOException; //Task ga file biriktirish
 
 
-     ApiResponse deleteTheAttachedFile(Long fileId);//biriktirilgan file ni o'chirish
+     ApiResponse deleteTheAttachedFile(Long taskId,UUID attachmentId);//biriktirilgan file ni o'chirish
 
      ApiResponse addCommentToTask(Long taskId, CommentDto commentDto);
 

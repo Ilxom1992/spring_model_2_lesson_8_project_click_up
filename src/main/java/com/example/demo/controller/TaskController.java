@@ -6,7 +6,9 @@ import com.example.demo.service.TaskService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -34,13 +36,13 @@ public class TaskController {
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/attachAFileToYourTask")
-    public HttpEntity<?> attachAFileToYourTask(@PathVariable Long statusId, @RequestBody TaskDto taskDto) {
-        ApiResponse response = taskService.attachAFileToYourTask(taskDto);
+    public HttpEntity<?> attachAFileToYourTask(MultipartHttpServletRequest request,@RequestBody TaskAttachmentDTO taskAttachmentDTO) throws IOException {
+        ApiResponse response = taskService.attachAFileToYourTask(request,taskAttachmentDTO);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
-    @PostMapping("/deleteTheAttachedFile/{fileId}")
-    public HttpEntity<?> deleteTheAttachedFile(@PathVariable Long fileId) {
-        ApiResponse response = taskService.deleteTheAttachedFile(fileId);
+    @PostMapping("/deleteTheAttachedFile")
+    public HttpEntity<?> deleteTheAttachedFile(@RequestParam Long taskId,@RequestParam UUID attachmentId) {
+        ApiResponse response = taskService.deleteTheAttachedFile(taskId,attachmentId);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/addCommentToTask/{taskId}")

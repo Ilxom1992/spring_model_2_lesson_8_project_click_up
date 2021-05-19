@@ -6,12 +6,20 @@ import com.example.demo.repository.*;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class TaskServiceImp implements TaskService{
+    private static final String uploadDirectory = "uploadedFiles";
     final TaskRepository taskRepository;
     final StatusRepository statusRepository;
     final CategoryRepositoryc categoryRepositoryc;
@@ -21,8 +29,10 @@ public class TaskServiceImp implements TaskService{
     final TagRepository tagRepository;
     final UserRepository userRepository;
     final TaskUserRepository taskUserRepository;
+    final AttachmentRepository attachmentRepository;
+    final TaskAttachmentRepository taskAttachmentRepository;
 
-    public TaskServiceImp(TaskRepository taskRepository, StatusRepository statusRepository, CategoryRepositoryc categoryRepositoryc, PriorityRepository priorityRepository, CommitRepository commitRepository, WorkspaceRepository workspaceRepository, TagRepository tagRepository, UserRepository userRepository, TaskUserRepository taskUserRepository) {
+    public TaskServiceImp(TaskRepository taskRepository, StatusRepository statusRepository, CategoryRepositoryc categoryRepositoryc, PriorityRepository priorityRepository, CommitRepository commitRepository, WorkspaceRepository workspaceRepository, TagRepository tagRepository, UserRepository userRepository, TaskUserRepository taskUserRepository, AttachmentRepository attachmentRepository, TaskAttachmentRepository taskAttachmentRepository) {
         this.taskRepository = taskRepository;
         this.statusRepository = statusRepository;
         this.categoryRepositoryc = categoryRepositoryc;
@@ -32,6 +42,8 @@ public class TaskServiceImp implements TaskService{
         this.tagRepository = tagRepository;
         this.userRepository = userRepository;
         this.taskUserRepository = taskUserRepository;
+        this.attachmentRepository = attachmentRepository;
+        this.taskAttachmentRepository = taskAttachmentRepository;
     }
 
     @Override
@@ -69,16 +81,53 @@ public class TaskServiceImp implements TaskService{
     }
 
     @Override
-    public ApiResponse attachAFileToYourTask(TaskDto taskDto) {
-        return null;
+    public ApiResponse attachAFileToYourTask(MultipartHttpServletRequest request, TaskAttachmentDTO taskAttachmentDTO) throws IOException {
+        final Iterator<String> fileNames = request.getFileNames();
+        final MultipartFile file = request.getFile(fileNames.next());
+        if (file != null) {
+            final String originalFilename = file.getOriginalFilename();
+            Attachment attachment = new Attachment();
+            attachment.setFileOriginalName(originalFilename);
+            attachment.setSize(file.getSize());
+            attachment.setContentType(file.getContentType());
+            assert originalFilename != null;
+            final String[] split = originalFilename.split("\\.");
+            final String name = UUID.randomUUID().toString() + "." + split[split.length - 1];
+            attachment.setName(name);
+
+            final Attachment savedAttachment = attachmentRepository.save(attachment);
+            final Path path = Paths.get(uploadDirectory + "/" + name);
+            Files.copy(file.getInputStream(), path);
+
+            final Optional<Task> optionalTask = taskRepository.findById(taskAttachmentDTO.getTaskId());
+            if (!optionalTask.isPresent()) {
+                return new ApiResponse("Task not found", false);
+            }
+            final Task task = optionalTask.get();
+
+            TaskAttachment taskAttachment = new TaskAttachment(
+                    task, savedAttachment, taskAttachmentDTO.isPinnedCoverPhoto()
+            );
+            taskAttachmentRepository.save(taskAttachment);
+
+            return new ApiResponse("File saved. File id: " + attachment.getId(), true);
+        }
+        return new ApiResponse("File not saved", false);
     }
 
     @Override
-    public ApiResponse deleteTheAttachedFile(Long fileId) {
-        return null;
+    public ApiResponse deleteTheAttachedFile(Long taskId,UUID attachmentId) {
+        final Optional<TaskAttachment> optionalTaskAttachment = taskAttachmentRepository.findByTaskIdAndAttachmentId(taskId, attachmentId);
+        if (!optionalTaskAttachment.isPresent()) {
+            return new ApiResponse("Not found", false);
+        }
+
+        final TaskAttachment taskAttachment = optionalTaskAttachment.get();
+
+        taskAttachmentRepository.delete(taskAttachment);
+
+        return new ApiResponse("Deleted", true);
     }
-
-
     @Override
     public ApiResponse addCommentToTask(Long taskId, CommentDto commentDto) {
         Task task = taskRepository.findById(taskId).get();
@@ -129,6 +178,7 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public ApiResponse removeAUserToATask(UUID userId, Long taskId) {
-        return null;
+        taskUserRepository.deleteByTaskIdAndUserId(taskId,userId);
+          return new  ApiResponse("Taskdan user O'chirildi",true);
     }
 }

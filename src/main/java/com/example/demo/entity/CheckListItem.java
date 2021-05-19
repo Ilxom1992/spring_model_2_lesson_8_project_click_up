@@ -25,4 +25,11 @@ public class CheckListItem  {
 
     @ManyToOne
     private User assignedUser;
+
+    public CheckListItem(String name, CheckList checkList, boolean resolved, User assignedUser) {
+        this.name = name;
+        this.checkList = checkList;
+        this.resolved = resolved;
+        this.assignedUser = assignedUser;
+    }
 }
