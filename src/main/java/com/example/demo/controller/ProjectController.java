@@ -26,19 +26,19 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.getProject());
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addProject")
     public HttpEntity<?> addProject(@RequestBody ProjectDTO projectDTO) {
         ApiResponse response = projectService.addProject(projectDTO);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/project/{id}")
     public HttpEntity<?> edit(@PathVariable Long id, @RequestBody ProjectDTO projectDTO) {
         ApiResponse response = projectService.editProject(id, projectDTO);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/project/{id}")
     public HttpEntity<?> delete(@PathVariable Long id) {
         ApiResponse response = projectService.deleteProject(id);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);

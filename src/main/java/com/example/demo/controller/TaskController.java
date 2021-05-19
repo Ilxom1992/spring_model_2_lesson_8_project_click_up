@@ -10,6 +10,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/task")
 public class TaskController {
@@ -37,6 +39,41 @@ public class TaskController {
     @PostMapping("/attachAFileToYourTask")
     public HttpEntity<?> attachAFileToYourTask(@PathVariable Long statusId, @RequestBody TaskDto taskDto) {
         ApiResponse response = taskService.attachAFileToYourTask(taskDto);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/deleteTheAttachedFile/{fileId}")
+    public HttpEntity<?> deleteTheAttachedFile(@PathVariable Long fileId) {
+        ApiResponse response = taskService.deleteTheAttachedFile(fileId);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/addCommentToTask/{taskId}")
+    public HttpEntity<?> addCommentToTask(@PathVariable Long taskId) {
+        ApiResponse response = taskService.addCommentToTask(taskId);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/addTagToTask/{taskId}")
+    public HttpEntity<?> addTagToTask(@PathVariable Long taskId) {
+        ApiResponse response = taskService.addTagToTask(taskId);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/changeTag/{tagId}")
+    public HttpEntity<?> changeTag(@PathVariable Long tagId) {
+        ApiResponse response = taskService.changeTag(tagId);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/deleteTag/{tagId}")
+    public HttpEntity<?> deleteTag(@PathVariable Long tagId) {
+        ApiResponse response = taskService.deleteTag(tagId);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/assignAUserToATask")
+    public HttpEntity<?> assignAUserToATask(@RequestParam UUID userId,@RequestParam Long taskId) {
+        ApiResponse response = taskService.assignAUserToATask(userId,taskId);
+        return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
+    }
+    @PostMapping("/removeAUserToATask")
+    public HttpEntity<?> removeAUserToATask(@RequestParam UUID userId,@RequestParam Long taskId) {
+        ApiResponse response = taskService.removeAUserToATask(userId,taskId);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
 }

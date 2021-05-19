@@ -15,6 +15,7 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TaskServiceImp implements TaskService{
@@ -60,33 +61,34 @@ public class TaskServiceImp implements TaskService{
         return null;
     }
 
+
     @Override
-    public ApiResponse addCommentToTask() {
+    public ApiResponse addCommentToTask(Long taskId) {
         return null;
     }
 
     @Override
-    public ApiResponse addTagToTask() {
+    public ApiResponse addTagToTask(Long taskId) {
         return null;
     }
 
     @Override
-    public ApiResponse changeTag() {
+    public ApiResponse changeTag(Long tagId) {
         return null;
     }
 
     @Override
-    public ApiResponse deleteTag() {
+    public ApiResponse deleteTag(Long tagId) {
         return null;
     }
 
     @Override
-    public ApiResponse assignAUserToATask() {
+    public ApiResponse assignAUserToATask(UUID userId, Long taskId) {
         return null;
     }
 
     @Override
-    public ApiResponse removeAUserToATask() {
+    public ApiResponse removeAUserToATask(UUID userId, Long taskId) {
         return null;
     }
 }

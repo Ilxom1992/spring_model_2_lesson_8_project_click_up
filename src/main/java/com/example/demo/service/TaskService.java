@@ -4,29 +4,31 @@ import com.example.demo.payload.ApiResponse;
 import com.example.demo.payload.StatusDto;
 import com.example.demo.payload.TaskDto;
 
-public interface TaskService {
-    public ApiResponse addTask(TaskDto taskDto);
+import java.util.UUID;
 
-    public ApiResponse editTask(Long id,TaskDto taskDto);
+public interface TaskService {
+     ApiResponse addTask(TaskDto taskDto);
+
+     ApiResponse editTask(Long id,TaskDto taskDto);
 
     //Task statusini o'zgartirish
     public ApiResponse changeYourTaskStatus(Long statusId, StatusDto statusDto);
 
     //Task ga file biriktirish
-    public ApiResponse attachAFileToYourTask(TaskDto taskDto);
+     ApiResponse attachAFileToYourTask(TaskDto taskDto);
 
     //biriktirilgan file ni o'chirish
-    public ApiResponse deleteTheAttachedFile(Long fileId);
+     ApiResponse deleteTheAttachedFile(Long fileId);
 
-    public ApiResponse addCommentToTask();
+     ApiResponse addCommentToTask(Long taskId);
 
-    public ApiResponse addTagToTask();
+     ApiResponse addTagToTask(Long taskId);
 
-    public ApiResponse changeTag();
+     ApiResponse changeTag(Long tagId);
 
-    public ApiResponse deleteTag();
+     ApiResponse deleteTag(Long tagId);
 
-    public ApiResponse assignAUserToATask();
+     ApiResponse assignAUserToATask(UUID userId,Long taskId);
 
-    public ApiResponse removeAUserToATask();
+     ApiResponse removeAUserToATask(UUID userId,Long taskId);
 }
