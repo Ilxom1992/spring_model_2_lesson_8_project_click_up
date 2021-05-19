@@ -21,7 +21,7 @@ public interface TaskService {
 
      ApiResponse addTagToTask(Long taskId, TagDto tagDto);
 
-     ApiResponse changeTag(Long tagId);
+     ApiResponse changeTag(Long tagId,TagDto tagDto);
 
      ApiResponse deleteTag(Long tagId);
 

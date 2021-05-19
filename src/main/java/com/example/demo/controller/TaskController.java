@@ -54,8 +54,8 @@ public class TaskController {
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/changeTag/{tagId}")
-    public HttpEntity<?> changeTag(@PathVariable Long tagId) {
-        ApiResponse response = taskService.changeTag(tagId);
+    public HttpEntity<?> changeTag(@PathVariable Long tagId,TagDto tagDto) {
+        ApiResponse response = taskService.changeTag(tagId,tagDto);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/deleteTag/{tagId}")

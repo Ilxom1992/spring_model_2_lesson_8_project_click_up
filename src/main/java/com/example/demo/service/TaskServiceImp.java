@@ -19,8 +19,10 @@ public class TaskServiceImp implements TaskService{
     final CommitRepository commitRepository;
     final WorkspaceRepository workspaceRepository;
     final TagRepository tagRepository;
+    final UserRepository userRepository;
+    final TaskUserRepository taskUserRepository;
 
-    public TaskServiceImp(TaskRepository taskRepository, StatusRepository statusRepository, CategoryRepositoryc categoryRepositoryc, PriorityRepository priorityRepository, CommitRepository commitRepository, WorkspaceRepository workspaceRepository, TagRepository tagRepository) {
+    public TaskServiceImp(TaskRepository taskRepository, StatusRepository statusRepository, CategoryRepositoryc categoryRepositoryc, PriorityRepository priorityRepository, CommitRepository commitRepository, WorkspaceRepository workspaceRepository, TagRepository tagRepository, UserRepository userRepository, TaskUserRepository taskUserRepository) {
         this.taskRepository = taskRepository;
         this.statusRepository = statusRepository;
         this.categoryRepositoryc = categoryRepositoryc;
@@ -28,6 +30,8 @@ public class TaskServiceImp implements TaskService{
         this.commitRepository = commitRepository;
         this.workspaceRepository = workspaceRepository;
         this.tagRepository = tagRepository;
+        this.userRepository = userRepository;
+        this.taskUserRepository = taskUserRepository;
     }
 
     @Override
@@ -66,13 +70,11 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public ApiResponse attachAFileToYourTask(TaskDto taskDto) {
-
         return null;
     }
 
     @Override
     public ApiResponse deleteTheAttachedFile(Long fileId) {
-
         return null;
     }
 
@@ -100,18 +102,29 @@ public class TaskServiceImp implements TaskService{
     }
 
     @Override
-    public ApiResponse changeTag(Long tagId) {
-        return null;
+    public ApiResponse changeTag(Long tagId,TagDto tagDto) {
+
+        Tag tag = tagRepository.findById(tagId).get();
+        tag.setColor(tag.getColor());
+        tag.setName(tagDto.getName());
+        tagRepository.save(tag);
+        return new  ApiResponse("Tag biriktirildi",true);
     }
 
     @Override
     public ApiResponse deleteTag(Long tagId) {
-        return null;
+        tagRepository.deleteById(tagId);
+        return new  ApiResponse("Tag o'chirildi",true);
     }
 
     @Override
     public ApiResponse assignAUserToATask(UUID userId, Long taskId) {
-        return null;
+        TaskUser taskUser=new TaskUser();
+        taskUser.setTask(taskRepository.findById(taskId).get());
+        taskUser.setUser(userRepository.findById(userId).get());
+        taskUserRepository.save(taskUser);
+        return new  ApiResponse("Taskga user biriktirildi",true);
+
     }
 
     @Override
