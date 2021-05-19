@@ -4,9 +4,10 @@ import com.example.demo.entity.Category;
 import com.example.demo.entity.Project;
 import com.example.demo.entity.Space;
 import com.example.demo.entity.enums.StatusType;
+import lombok.Data;
 
 import javax.persistence.*;
-
+@Data
 public class StatusDto {
 
 

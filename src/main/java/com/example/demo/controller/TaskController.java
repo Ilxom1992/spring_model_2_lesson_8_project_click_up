@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Status;
-import com.example.demo.payload.ApiResponse;
-import com.example.demo.payload.SpaceDTO;
-import com.example.demo.payload.StatusDto;
-import com.example.demo.payload.TaskDto;
+import com.example.demo.payload.*;
 import com.example.demo.service.TaskService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -47,13 +44,13 @@ public class TaskController {
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/addCommentToTask/{taskId}")
-    public HttpEntity<?> addCommentToTask(@PathVariable Long taskId) {
-        ApiResponse response = taskService.addCommentToTask(taskId);
+    public HttpEntity<?> addCommentToTask(@PathVariable Long taskId,@RequestBody CommentDto commentDto) {
+        ApiResponse response = taskService.addCommentToTask(taskId,commentDto);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/addTagToTask/{taskId}")
-    public HttpEntity<?> addTagToTask(@PathVariable Long taskId) {
-        ApiResponse response = taskService.addTagToTask(taskId);
+    public HttpEntity<?> addTagToTask(@PathVariable Long taskId,@RequestBody TagDto tagDto) {
+        ApiResponse response = taskService.addTagToTask(taskId,tagDto);
         return ResponseEntity.status(response.isSuccess() ? 201 : 409).body(response);
     }
     @PostMapping("/changeTag/{tagId}")

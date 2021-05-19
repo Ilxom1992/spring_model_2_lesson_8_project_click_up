@@ -1,28 +1,25 @@
 package com.example.demo.service;
 
-import com.example.demo.payload.ApiResponse;
-import com.example.demo.payload.StatusDto;
-import com.example.demo.payload.TaskDto;
+import com.example.demo.payload.*;
 
 import java.util.UUID;
 
 public interface TaskService {
+
      ApiResponse addTask(TaskDto taskDto);
 
      ApiResponse editTask(Long id,TaskDto taskDto);
 
-    //Task statusini o'zgartirish
-    public ApiResponse changeYourTaskStatus(Long statusId, StatusDto statusDto);
+     ApiResponse changeYourTaskStatus(Long statusId, StatusDto statusDto);//Task statusini o'zgartirish
 
-    //Task ga file biriktirish
-     ApiResponse attachAFileToYourTask(TaskDto taskDto);
+     ApiResponse attachAFileToYourTask(TaskDto taskDto); //Task ga file biriktirish
 
-    //biriktirilgan file ni o'chirish
-     ApiResponse deleteTheAttachedFile(Long fileId);
 
-     ApiResponse addCommentToTask(Long taskId);
+     ApiResponse deleteTheAttachedFile(Long fileId);//biriktirilgan file ni o'chirish
 
-     ApiResponse addTagToTask(Long taskId);
+     ApiResponse addCommentToTask(Long taskId, CommentDto commentDto);
+
+     ApiResponse addTagToTask(Long taskId, TagDto tagDto);
 
      ApiResponse changeTag(Long tagId);
 

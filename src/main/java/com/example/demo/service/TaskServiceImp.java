@@ -1,17 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Status;
-import com.example.demo.entity.Task;
-import com.example.demo.payload.ApiResponse;
-import com.example.demo.payload.StatusDto;
-import com.example.demo.payload.TaskDto;
-import com.example.demo.repository.CategoryRepositoryc;
-import com.example.demo.repository.PriorityRepository;
-import com.example.demo.repository.StatusRepository;
-import com.example.demo.repository.TaskRepository;
+import com.example.demo.entity.*;
+import com.example.demo.payload.*;
+import com.example.demo.repository.*;
 
 
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,12 +16,18 @@ public class TaskServiceImp implements TaskService{
     final StatusRepository statusRepository;
     final CategoryRepositoryc categoryRepositoryc;
     final PriorityRepository priorityRepository;
+    final CommitRepository commitRepository;
+    final WorkspaceRepository workspaceRepository;
+    final TagRepository tagRepository;
 
-    public TaskServiceImp(TaskRepository taskRepository, StatusRepository statusRepository, CategoryRepositoryc categoryRepositoryc, PriorityRepository priorityRepository) {
+    public TaskServiceImp(TaskRepository taskRepository, StatusRepository statusRepository, CategoryRepositoryc categoryRepositoryc, PriorityRepository priorityRepository, CommitRepository commitRepository, WorkspaceRepository workspaceRepository, TagRepository tagRepository) {
         this.taskRepository = taskRepository;
         this.statusRepository = statusRepository;
         this.categoryRepositoryc = categoryRepositoryc;
         this.priorityRepository = priorityRepository;
+        this.commitRepository = commitRepository;
+        this.workspaceRepository = workspaceRepository;
+        this.tagRepository = tagRepository;
     }
 
     @Override
@@ -38,38 +37,66 @@ public class TaskServiceImp implements TaskService{
         task.setDescription(taskDto.getDescription());
         Optional<Status> optionalStatus = statusRepository.findById(taskDto.getStatusId());
         task.setStatus(optionalStatus.get());
-        return null;
+        Task save = taskRepository.save(task);
+        return new  ApiResponse("Task saqlandi",true,save);
     }
 
     @Override
     public ApiResponse editTask(Long id, TaskDto taskDto) {
-        return null;
+        Task task = taskRepository.findById(id).get();
+        task.setName(taskDto.getName());
+        task.setDescription(taskDto.getDescription());
+        Optional<Status> optionalStatus = statusRepository.findById(taskDto.getStatusId());
+        task.setStatus(optionalStatus.get());
+        Task save = taskRepository.save(task);
+        return new  ApiResponse("Task saqlandi",true,save);
+
     }
 
     @Override
     public ApiResponse changeYourTaskStatus(Long statusId, StatusDto statusDto) {
-        return null;
+        Optional<Status> optionalStatus = statusRepository.findById(statusId);
+        Status status = optionalStatus.get();
+        status.setColor(statusDto.getColor());
+        status.setName(statusDto.getName());
+        status.setType(statusDto.getType());
+        statusRepository.save(status);
+        return new  ApiResponse("Task statusi o'zgartirildi",true);
     }
 
     @Override
     public ApiResponse attachAFileToYourTask(TaskDto taskDto) {
+
         return null;
     }
 
     @Override
     public ApiResponse deleteTheAttachedFile(Long fileId) {
+
         return null;
     }
 
 
     @Override
-    public ApiResponse addCommentToTask(Long taskId) {
-        return null;
+    public ApiResponse addCommentToTask(Long taskId, CommentDto commentDto) {
+        Task task = taskRepository.findById(taskId).get();
+        Comment comment=new Comment();
+        comment.setName(comment.getName());
+        comment.setTask(task);
+        commitRepository.save(comment);
+        return new  ApiResponse("Commit Taskga Biriktirildi",true);
     }
 
     @Override
-    public ApiResponse addTagToTask(Long taskId) {
-        return null;
+    public ApiResponse addTagToTask(Long workSpaceId, TagDto tagDto) {
+
+        Workspace workspace = workspaceRepository.findById(workSpaceId).get();
+        Tag tag=new Tag();
+        tag.setColor(tag.getColor());
+        tag.setName(tagDto.getName());
+        tag.setWorkspace(workspace);
+        tagRepository.save(tag);
+        return new  ApiResponse("Tag biriktirildi",true);
     }
 
     @Override
